@@ -50,6 +50,7 @@ export default function BranchVersionVitePlugin(): Plugin {
     return {
         name: 'branch-version-vite-plugin',
         apply: 'build', // 关键：仅对 build 生效，dev 阶段跳过
+        // configResolved 在 Vite 完成配置文件（vite.config.ts）解析与合并之后立即被调用。
         configResolved(config) {
             // 先保存 outDir，后面用
             outDir = config.build.outDir
