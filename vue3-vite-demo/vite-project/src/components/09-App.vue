@@ -19,7 +19,7 @@ let objRet = reactive(obj)
 watch(() => objRet.num, (n, o) => {
     console.log(n, o)
 })
-// 方式二
+// 方式二：写成数组，可以监听多个
 watch([() => objRet.num, () => objRet.age], (n, o) => {
     console.log('数组方式---->', n, o)
 })

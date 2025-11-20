@@ -12,8 +12,8 @@ import { ref } from 'vue'
 
 let num = ref(20)
 
-const fnCall = () => {
-    num.value++
+const fnCall = (val: number) => {
+    num.value += val
 }
 
 </script>

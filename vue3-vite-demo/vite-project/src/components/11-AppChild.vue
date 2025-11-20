@@ -20,10 +20,10 @@ defineProps({
 // 子传父的时候需要先定义好 emit 这个方法
 // const emit = defineEmits(['fn'])
 const emit = defineEmits<{
-    (event: 'fn'): void
+    (event: 'fn', val: number): void
 }>()
 const handleClick = () => {
-    emit('fn')
+    emit('fn', 5)
 }
 </script>
 
