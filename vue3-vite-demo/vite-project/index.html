@@ -6,8 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>vite-project</title>
   </head>
+  <script>
+    var globalVar = "globalVar变量";
+    var globalObj = {
+      name: 'kaimo',
+      age: 313
+    }
+    function fn(str) {
+      console.log('执行了fn函数', str)
+    }
+  </script>
   <body>
     <div id="app"></div>
+    <!-- 指定标签 -->
+    <div id="test">
+      <div>还行</div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
