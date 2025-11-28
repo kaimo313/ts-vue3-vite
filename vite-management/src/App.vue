@@ -1,6 +1,6 @@
 <template>
   <div class=''>
-    
+    <el-button>按钮</el-button>
   </div>
 </template>
 
@@ -11,6 +11,6 @@ import { } from 'vue'
 
 <style lang='less' scoped>
 .a {
-  
+
 }
 </style>
