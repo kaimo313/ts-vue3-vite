@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-vue3的双向数据绑定</title>
+</head>
+<body>
+    <input type="text" id="ipt">
+    <p id="op"></p>
+    <script>
+        let obj = {
+            txtVal: "初始值"
+        }
+        function myReactive(obj) {
+            return new Proxy(obj, {
+                get(target, property) {
+                    return target[property]
+                },
+                set(target, property, newVal) {
+                    // 对象劫持，数据劫持
+                    ipt.value = newVal
+                    op.innerHTML = newVal
+                    target[property] = newVal
+                    console.log('set--obj-->', obj)
+                }
+            })
+        }
+
+        let objRet = myReactive(obj)
+        ipt.value = objRet.txtVal
+        op.innerHTML = objRet.txtVal
+        // 监听input事件
+        ipt.addEventListener("input", e => {
+            objRet.txtVal = e.target.value
+            console.log('input--objRet-->', objRet)
+        })
+    </script>
+</body>
+</html>

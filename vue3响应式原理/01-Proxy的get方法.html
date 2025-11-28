@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-Proxy的get方法</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            name: 'kaimo',
+            age: 313
+        }
+        // Proxy 代理 new Proxy() 创建一个代理对象
+        // new Proxy(要代理的这个对象, {get(){}, set(){}})
+        let newObj = new Proxy(obj, {
+            get(target, property) {
+                // 什么时候执行？ 当我们访问 newObj 的某个属性的时候
+                // target：是这个obj对象
+                // property：这个就是我们访问的这个属性
+                console.log('执行了get', target, property)
+                return target[property]
+            }
+        })
+        // newObj 是一个代理对象，属性和值和 obj 一样
+        console.log(newObj)
+        console.log(newObj.name)
+        console.log(newObj.age)
+    </script>
+</body>
+</html>

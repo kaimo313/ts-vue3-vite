@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-Proxy的set方法</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            name: 'kaimo',
+            age: 313
+        }
+        // Proxy 代理 new Proxy() 创建一个代理对象
+        // new Proxy(要代理的这个对象, {get(){}, set(){}})
+        let newObj = new Proxy(obj, {
+            get(target, property) {
+                // 什么时候执行？ 当我们访问 newObj 的某个属性的时候
+                // target：是这个obj对象
+                // property：这个就是我们访问的这个属性
+                console.log('执行了get', target, property)
+                return target[property]
+            },
+            set(target, property, newVal) {
+                // 什么时候执行？ 当我们修改了 newObj 的某个属性的时候
+                console.log('执行了set', target, property, newVal)
+                // 数据劫持 newVal 就是 = 后面的这个值
+                // 在这里修改属性成为新的值，下次访问才能拿到新值
+                target[property] = newVal
+            }
+        })
+        newObj.age = 18; // 触发执行了 set
+        console.log(newObj.age)
+    </script>
+</body>
+</html>
