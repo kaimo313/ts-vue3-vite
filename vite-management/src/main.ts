@@ -1,5 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
+import { initRouter } from './router'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App);
+// 初始化路由
+initRouter(app);
+app.mount('#app')

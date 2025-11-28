@@ -3,6 +3,7 @@ import {
     createWebHashHistory,
     type RouteRecordRaw
 } from 'vue-router'
+import { type App } from 'vue'
 
 const routes: RouteRecordRaw[] = [
     {
@@ -17,4 +18,6 @@ const router = createRouter({
     routes // 路由配置
 })
 
-export default router
+export const initRouter = (app: App<Element>) => {
+    app.use(router)
+}
