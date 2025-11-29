@@ -18,14 +18,14 @@
 </template>
 
 <script lang='ts' setup>
-import { reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 
 let ruleForm = reactive({
     username: "",
     pwd: ""
 })
-// 自定义密码校验规则
-const validatePwd = (rule: unknown, value: string | undefined, callback: (msg?: string) => void) => {
+// 自定义密码校验规则（_variable - 未使用的变量 ts不校验）
+const validatePwd = (_rule: unknown, value: string | undefined, callback: (msg?: string) => void) => {
     if(!value) {
         callback('密码不能为空')
     } else {
@@ -50,9 +50,21 @@ let rules = reactive({
     ]
 })
 
+// 获取el-form组件对象
+let ruleFormRef = ref()
+
+onMounted(() => {
+    console.log('组件实例:', ruleFormRef.value)
+    console.log('DOM 元素:', ruleFormRef.value?.$el)
+})
+
 // 登录
 const loginFn = () => {
-
+    ruleFormRef.value.validate().then(() => {
+        console.log('校验通过')
+    }).catch(() => {
+        console.log('校验不通过')
+    })
 }
 
 </script>
