@@ -67,6 +67,9 @@ const loginFn = () => {
             password: ruleForm.pwd
         }).then((res) => {
             console.log(res)
+            if(res.code === 200) {
+
+            }
         })
     }).catch(() => {
         console.log('校验不通过')
