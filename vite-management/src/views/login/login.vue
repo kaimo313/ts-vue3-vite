@@ -19,7 +19,7 @@
 
 <script lang='ts' setup>
 import { onMounted, reactive, ref } from 'vue'
-import { adminLoginApi } from '@/api/login'
+import { adminLoginApi, getAdminInfoApi } from '@/api/login'
 import Cookie from 'js-cookie'
 import { ElMessage } from 'element-plus'
 
@@ -61,17 +61,23 @@ onMounted(() => {
     console.log('DOM 元素:', ruleFormRef.value?.$el)
 })
 
-// 登录
+// 点击登录
 const loginFn = () => {
     ruleFormRef.value.validate().then(() => {
         adminLoginApi({
             username: ruleForm.username,
             password: ruleForm.pwd
         }).then((res) => {
-            console.log(res)
             if(res.code === 200) {
+                // 储存cookie
                 Cookie.set('token', res.data.token, { expires: 7 })
                 ElMessage.success('登录成功')
+                // 获取用户信息
+                getAdminInfoApi().then((res) => {
+                    if(res.code === 200) {
+
+                    }
+                })
             } else {
                 ElMessage.error('登录报错')
             }
