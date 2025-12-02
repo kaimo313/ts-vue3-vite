@@ -19,6 +19,7 @@
 
 <script lang='ts' setup>
 import { onMounted, reactive, ref } from 'vue'
+import { adminLoginApi } from '@/api/login'
 
 let ruleForm = reactive({
     username: "",
@@ -61,7 +62,12 @@ onMounted(() => {
 // 登录
 const loginFn = () => {
     ruleFormRef.value.validate().then(() => {
-        console.log('校验通过')
+        adminLoginApi({
+            username: ruleForm.username,
+            password: ruleForm.pwd
+        }).then((res) => {
+            console.log(res)
+        })
     }).catch(() => {
         console.log('校验不通过')
     })
