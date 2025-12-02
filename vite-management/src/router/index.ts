@@ -7,9 +7,18 @@ import { type App } from 'vue'
 
 const routes: RouteRecordRaw[] = [
     {
+        path: '/',
+        redirect: '/login'
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('../views/login/login.vue')
+    },
+    {
+        path: '/home',
+        name: 'home',
+        component: () => import('../views/home/home.vue')
     }
 ]
 

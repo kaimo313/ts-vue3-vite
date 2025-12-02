@@ -21,6 +21,7 @@
 import { onMounted, reactive, ref } from 'vue'
 import { adminLoginApi } from '@/api/login'
 import Cookie from 'js-cookie'
+import { ElMessage } from 'element-plus'
 
 let ruleForm = reactive({
     username: "",
@@ -70,6 +71,9 @@ const loginFn = () => {
             console.log(res)
             if(res.code === 200) {
                 Cookie.set('token', res.data.token, { expires: 7 })
+                ElMessage.success('登录成功')
+            } else {
+                ElMessage.error('登录报错')
             }
         })
     }).catch(() => {
