@@ -10,7 +10,7 @@ interface AdminLoginResponse {
     message: string
     data: {
         token: string
-    } | null
+    }
 }
 
 // 登录接口返回token

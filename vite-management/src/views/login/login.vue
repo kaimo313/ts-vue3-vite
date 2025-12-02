@@ -20,6 +20,7 @@
 <script lang='ts' setup>
 import { onMounted, reactive, ref } from 'vue'
 import { adminLoginApi } from '@/api/login'
+import Cookie from 'js-cookie'
 
 let ruleForm = reactive({
     username: "",
@@ -68,7 +69,7 @@ const loginFn = () => {
         }).then((res) => {
             console.log(res)
             if(res.code === 200) {
-
+                Cookie.set('token', res.data.token, { expires: 7 })
             }
         })
     }).catch(() => {
