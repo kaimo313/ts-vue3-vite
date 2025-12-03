@@ -23,6 +23,7 @@ import { adminLoginApi, getAdminInfoApi } from '@/api/login'
 import Cookie from 'js-cookie'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 let ruleForm = reactive({
     username: "",
@@ -58,6 +59,8 @@ let rules = reactive({
 let ruleFormRef = ref()
 // 获取项目路由对象
 let router = useRouter()
+// 获取当前项目的vuex对象
+let store = useStore()
 
 onMounted(() => {
     // console.log('组件实例:', ruleFormRef.value)
@@ -78,6 +81,8 @@ const loginFn = () => {
                 // 获取用户信息
                 getAdminInfoApi().then((res) => {
                     if(res.code === 200) {
+                        // 用户信息存储到vuex
+                        store.commit('updateMenus', res.data.menus)
                         // 跳转home页面
                         router.push('/home')
                     }

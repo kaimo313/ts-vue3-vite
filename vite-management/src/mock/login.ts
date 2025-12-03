@@ -72,7 +72,7 @@ export default [
                 code: 200,
                 message: '获取用户信息成功',
                 data: {
-                    menu: [
+                    menus: [
                         {
                             name: 'Dashboard',
                             path: '/dashboard'

@@ -18,7 +18,7 @@ interface AdminLoginResponse {
 }
 
 interface AdminInfoResponse {
-    menu: []
+    menus: []
 }
 
 // 登录接口返回token
