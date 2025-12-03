@@ -1,38 +1,39 @@
 <template>
     <div class="home-container">
-        <h1>欢迎，{{ username }}！</h1>
-        <p>登录成功，这是首页</p>
-        <el-button @click="logout">退出登录</el-button>
+        <div class="home-header">头部</div>
+        <div class="home-menu">菜单</div>
+        <div class="home-content">右侧内容</div>
     </div>
 </template>
 
 <script lang='ts' setup>
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
+import {  } from 'vue'
 
-const router = useRouter()
-const username = ref('')
-
-onMounted(() => {
-    username.value = localStorage.getItem('username') || '用户'
-})
-
-const logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('username')
-    ElMessage.success('已退出登录')
-    router.push('/login')
-}
 </script>
 
 <style lang='less' scoped>
 .home-container {
-    padding: 40px;
-    text-align: center;
-    
-    h1 {
-        margin-bottom: 20px;
+    position: relative;
+    height: 100%;
+    .home-header {
+        height: 70px;
+        background-color: goldenrod;
+    }
+    .home-menu {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        bottom: 0;
+        width: 250px;
+        background-color: #a37676;
+    }
+    .home-content {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        left: 250px;
+        bottom: 0;
+        background-color: skyblue;
     }
 }
 </style>

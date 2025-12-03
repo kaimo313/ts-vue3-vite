@@ -16,10 +16,10 @@ const extractTokenIssueTime = (token: string) => {
 // 校验headers中的Authorization token是否有效
 const validateToken = (headers: Record<string, string>) => {
     // 约定从Authorization中读取token
-    console.log('headers---->', headers)
+    // console.log('headers---->', headers)
     const token = headers.authorization || headers.Authorization
     const issueTime = token ? extractTokenIssueTime(token) : null
-    console.log('issueTime---->', issueTime)
+    // console.log('issueTime---->', issueTime)
     if (!token || !issueTime || Date.now() - issueTime > TOKEN_EXPIRE_DURATION) {
         return {
             valid: false,

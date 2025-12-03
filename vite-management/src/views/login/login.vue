@@ -22,6 +22,7 @@ import { onMounted, reactive, ref } from 'vue'
 import { adminLoginApi, getAdminInfoApi } from '@/api/login'
 import Cookie from 'js-cookie'
 import { ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router'
 
 let ruleForm = reactive({
     username: "",
@@ -55,6 +56,8 @@ let rules = reactive({
 
 // 获取el-form组件对象
 let ruleFormRef = ref()
+// 获取项目路由对象
+let router = useRouter()
 
 onMounted(() => {
     // console.log('组件实例:', ruleFormRef.value)
@@ -75,7 +78,8 @@ const loginFn = () => {
                 // 获取用户信息
                 getAdminInfoApi().then((res) => {
                     if(res.code === 200) {
-                        
+                        // 跳转home页面
+                        router.push('/home')
                     }
                 })
             } else {
