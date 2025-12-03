@@ -74,13 +74,137 @@ export default [
                 data: {
                     menus: [
                         {
-                            name: 'Dashboard',
-                            path: '/dashboard'
+                            id: '0',
+                            icon: 'member',
+                            createTime: '',
+                            hidden: 0,
+                            level: 0,
+                            name: 'ums',
+                            parentId: '0',
+                            sort: 0,
+                            title: '首页'
                         },
                         {
-                            name: 'Users',
-                            path: '/users'
-                        }
+                            id: '1',
+                            icon: 'dashboard',
+                            createTime: '',
+                            hidden: 0,
+                            level: 0,
+                            name: 'dashboard',
+                            parentId: '0',
+                            sort: 1,
+                            title: '商品'
+                        },
+                        {
+                            id: '1-1',
+                            icon: 'overview',
+                            createTime: '',
+                            hidden: 0,
+                            level: 1,
+                            name: 'overview',
+                            parentId: '1',
+                            sort: 0,
+                            title: '总览'
+                        },
+                        {
+                            id: '1-2',
+                            icon: 'stats',
+                            createTime: '',
+                            hidden: 0,
+                            level: 2,
+                            name: 'stats',
+                            parentId: '1',
+                            sort: 0,
+                            title: '统计面板'
+                        },
+                        {
+                            id: '2',
+                            icon: 'order',
+                            createTime: '',
+                            hidden: 0,
+                            level: 0,
+                            name: 'oms',
+                            parentId: '0',
+                            sort: 2,
+                            title: '订单'
+                        },
+                        {
+                            id: '2-1',
+                            icon: 'order-list',
+                            createTime: '',
+                            hidden: 0,
+                            level: 1,
+                            name: 'orderList',
+                            parentId: '2',
+                            sort: 0,
+                            title: '订单列表'
+                        },
+                        {
+                            id: '2-2',
+                            icon: 'order-detail',
+                            createTime: '',
+                            hidden: 0,
+                            level: 2,
+                            name: 'orderDetail',
+                            parentId: '2',
+                            sort: 0,
+                            title: '订单详情'
+                        },
+                        {
+                            id: '3',
+                            icon: 'product',
+                            createTime: '',
+                            hidden: 0,
+                            level: 0,
+                            name: 'pms',
+                            parentId: '0',
+                            sort: 3,
+                            title: '营销'
+                        },
+                        {
+                            id: '3-1',
+                            icon: 'product-list',
+                            createTime: '',
+                            hidden: 0,
+                            level: 1,
+                            name: 'productList',
+                            parentId: '3',
+                            sort: 0,
+                            title: '商品列表'
+                        },
+                        {
+                            id: '3-2',
+                            icon: 'product-detail',
+                            createTime: '',
+                            hidden: 0,
+                            level: 2,
+                            name: 'productDetail',
+                            parentId: '3',
+                            sort: 0,
+                            title: '商品详情'
+                        },
+                        {
+                            id: '4',
+                            icon: 'product',
+                            createTime: '',
+                            hidden: 0,
+                            level: 0,
+                            name: 'pms',
+                            parentId: '0',
+                            sort: 3,
+                            title: '权限'
+                        },
+                        {
+                            id: '4-1',
+                            icon: 'product-list',
+                            createTime: '',
+                            hidden: 0,
+                            level: 1,
+                            name: 'productList',
+                            parentId: '4',
+                            sort: 0,
+                            title: '商品列表'
+                        },
                     ]
                 }
             }
