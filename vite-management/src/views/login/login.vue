@@ -57,8 +57,8 @@ let rules = reactive({
 let ruleFormRef = ref()
 
 onMounted(() => {
-    console.log('组件实例:', ruleFormRef.value)
-    console.log('DOM 元素:', ruleFormRef.value?.$el)
+    // console.log('组件实例:', ruleFormRef.value)
+    // console.log('DOM 元素:', ruleFormRef.value?.$el)
 })
 
 // 点击登录
@@ -75,7 +75,7 @@ const loginFn = () => {
                 // 获取用户信息
                 getAdminInfoApi().then((res) => {
                     if(res.code === 200) {
-
+                        
                     }
                 })
             } else {

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 // 创建 axios 实例
 const request = axios.create({
@@ -9,6 +10,11 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
     (config) => {
+        let token = Cookies.get('token')
+        if(token) {
+            config.headers = config.headers || {}
+            config.headers.Authorization = token
+        }
         return config
     },
     (error) => {
