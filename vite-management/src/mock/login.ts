@@ -85,17 +85,6 @@ export default [
                             title: '首页'
                         },
                         {
-                            id: '1',
-                            icon: 'dashboard',
-                            createTime: '',
-                            hidden: 0,
-                            level: 0,
-                            name: 'dashboard',
-                            parentId: '0',
-                            sort: 1,
-                            title: '商品'
-                        },
-                        {
                             id: '1-1',
                             icon: 'overview',
                             createTime: '',
@@ -105,6 +94,17 @@ export default [
                             parentId: '1',
                             sort: 0,
                             title: '总览'
+                        },
+                        {
+                            id: '1',
+                            icon: 'dashboard',
+                            createTime: '',
+                            hidden: 0,
+                            level: 0,
+                            name: 'dashboard',
+                            parentId: '0',
+                            sort: 1,
+                            title: '商品'
                         },
                         {
                             id: '1-2',
@@ -184,17 +184,6 @@ export default [
                             title: '商品详情'
                         },
                         {
-                            id: '4',
-                            icon: 'product',
-                            createTime: '',
-                            hidden: 0,
-                            level: 0,
-                            name: 'pms',
-                            parentId: '0',
-                            sort: 3,
-                            title: '权限'
-                        },
-                        {
                             id: '4-1',
                             icon: 'product-list',
                             createTime: '',
@@ -204,6 +193,17 @@ export default [
                             parentId: '4',
                             sort: 0,
                             title: '商品列表'
+                        },
+                        {
+                            id: '4',
+                            icon: 'product',
+                            createTime: '',
+                            hidden: 0,
+                            level: 0,
+                            name: 'pms',
+                            parentId: '0',
+                            sort: 3,
+                            title: '权限'
                         },
                     ]
                 }

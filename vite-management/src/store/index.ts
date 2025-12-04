@@ -12,7 +12,7 @@ interface State {
 }
 
 interface NewMenus {
-    [key: string]: MenuObj
+    [key: string]: Partial<MenuObj>
 }
 
 const store = createStore<State>({
@@ -27,18 +27,19 @@ const store = createStore<State>({
             const menus = state.menus
 
             for (let i = 0; i < menus.length; i++) {
-                const menu = menus[i]
-                if (!menu) continue
-
+                const menu = menus[i] as MenuObj
                 if (menu.parentId === '0') {
                     // 一级菜单：初始化 children 为空数组，方便后续 push
-                    newMenus[menu.id] = { ...menu, children: [] }
+                    newMenus[menu.id] = {
+                        ...menus[i],
+                        children: newMenus[menu.id]?.children || []
+                    }
                 } else {
                     // 子级菜单：根据 parentId 找到对应的父级
-                    const parent = newMenus[menu.parentId]
-                    if (!parent) continue
-                    parent.children = parent.children || [] 
-                    parent.children.push(menu)
+                    const parentId = menu.parentId
+                    newMenus[parentId] = newMenus[parentId] || {}
+                    newMenus[parentId].children = newMenus[parentId].children || []
+                    newMenus[parentId].children.push(menu)
                 }
             }
             console.log('newMenus--------------------', newMenus)
