@@ -4,6 +4,8 @@ import {
     type RouteRecordRaw
 } from 'vue-router'
 import { type App } from 'vue'
+import store from '../store'
+import Cookie from 'js-cookie'
 
 const routes: RouteRecordRaw[] = [
     {
@@ -25,6 +27,16 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
     history: createWebHashHistory(),
     routes // 路由配置
+})
+
+// 前置导航守卫
+router.beforeEach((to, from, next) => {
+    // 1、token && vuex里面的 menus 为空
+    const token = Cookie.get('token')
+    console.log(store)
+    if(token && store.state.menus.length === 0) {
+        console.log('menus为空')
+    }
 })
 
 export const initRouter = (app: App<Element>) => {

@@ -8,6 +8,8 @@
                 class="el-menu-vertical-demo"
                 default-active="2"
                 text-color="#fff"
+                :unique-opened="true"
+                :router="true"
             >
                 <el-sub-menu v-for="menu in newMenus" :index="menu.id">
                     <template #title>
