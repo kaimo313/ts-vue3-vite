@@ -36,7 +36,10 @@ router.beforeEach((to, from, next) => {
     console.log(store)
     if(token && store.state.menus.length === 0) {
         console.log('menus为空')
+        // 获取用户信息
+        store.dispatch('getAdminInfoApi');
     }
+    next()
 })
 
 export const initRouter = (app: App<Element>) => {

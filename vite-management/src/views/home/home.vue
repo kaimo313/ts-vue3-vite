@@ -39,7 +39,7 @@
     }
 }
  * */ 
-import { } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 interface MenuObj {
@@ -55,7 +55,7 @@ interface NewMenus {
 }
 
 const store = useStore();
-const newMenus: NewMenus = store.getters.getNewMenus;
+const newMenus = computed<NewMenus>(() => store.getters.getNewMenus);
 console.log('newMenus---------home-----------', newMenus)
 </script>
 

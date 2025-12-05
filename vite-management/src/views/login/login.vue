@@ -79,13 +79,9 @@ const loginFn = () => {
                 Cookie.set('token', res.data.token, { expires: 7 })
                 ElMessage.success('登录成功')
                 // 获取用户信息
-                getAdminInfoApi().then((res) => {
-                    if(res.code === 200) {
-                        // 用户信息存储到vuex
-                        store.commit('updateMenus', res.data.menus)
-                        // 跳转home页面
-                        router.push('/home')
-                    }
+                store.dispatch('getAdminInfoApi').then(res => {
+                    // 跳转home页面
+                    router.push('/home')
                 })
             } else {
                 ElMessage.error('登录报错')

@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import { type App } from 'vue'
+import { getAdminInfoApi } from '@/api/login'
 
 interface MenuObj {
     id: string
@@ -52,7 +53,21 @@ const store = createStore<State>({
             state.menus = menus
         }
     },
-    actions: {},
+    actions: {
+        getAdminInfoApi({ commit }) {
+            return new Promise((resolve, reject) => {
+                getAdminInfoApi().then((res) => {
+                    if(res.code === 200) {
+                        // 用户信息存储到vuex
+                        commit('updateMenus', res.data.menus)
+                        resolve(res.data)
+                    }else {
+                        reject(res)
+                    }
+                })
+            })
+        }
+    },
     modules: {}
 })
 
