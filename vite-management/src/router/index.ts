@@ -21,6 +21,19 @@ const routes: RouteRecordRaw[] = [
         path: '/home',
         name: 'home',
         component: () => import('../views/home/home.vue')
+    },
+    // 动态生成的路由配置结构需要如下
+    {
+        path: '/pms',
+        name: 'pms',
+        component: () => import('../views/home/home.vue'),
+        children: [
+            {
+                path: 'product',
+                name: 'product',
+                component: () => import('../views/pms/product.vue'),
+            }
+        ]
     }
 ]
 
@@ -30,7 +43,7 @@ const router = createRouter({
 })
 
 // 前置导航守卫
-router.beforeEach((to, from, next) => {
+router.beforeEach((_to, _from, next) => {
     // 1、token && vuex里面的 menus 为空
     const token = Cookie.get('token')
     console.log(store)

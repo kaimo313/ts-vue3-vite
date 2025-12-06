@@ -16,12 +16,17 @@
                         <span>{{ menu.title }}</span>
                     </template>
                     <template v-for="submenu in menu.children">
-                        <el-menu-item v-if="submenu.hidden === 0" :index="submenu.id">{{ submenu.title }}</el-menu-item>
+                        <el-menu-item v-if="submenu.hidden === 0" :index="'/' + menu.name + '/' + submenu.name" :key="submenu.id">
+                            {{ submenu.title }}
+                        </el-menu-item>
                     </template>
                 </el-sub-menu>
             </el-menu>
         </div>
-        <div class="home-content">右侧内容</div>
+        <div class="home-content">
+            <!-- 右侧内容 -->
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -44,6 +49,7 @@ import { useStore } from 'vuex'
 
 interface MenuObj {
     id: string
+    name: string
     title: string
     parentId: string
     hidden: 0 | 1

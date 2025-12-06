@@ -86,22 +86,22 @@ export default [
                         },
                         {
                             id: '1-1',
-                            icon: 'overview',
+                            icon: 'product',
                             createTime: '',
                             hidden: 0,
                             level: 1,
-                            name: 'overview',
+                            name: 'product',
                             parentId: '1',
                             sort: 0,
-                            title: '总览'
+                            title: '商品列表'
                         },
                         {
                             id: '1',
-                            icon: 'dashboard',
+                            icon: 'pms',
                             createTime: '',
                             hidden: 0,
                             level: 0,
-                            name: 'dashboard',
+                            name: 'pms',
                             parentId: '0',
                             sort: 1,
                             title: '商品'
