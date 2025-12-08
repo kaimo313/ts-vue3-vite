@@ -23,18 +23,18 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../views/home/home.vue')
     },
     // 动态生成的路由配置结构需要如下
-    {
-        path: '/pms',
-        name: 'pms',
-        component: () => import('../views/home/home.vue'),
-        children: [
-            {
-                path: 'product',
-                name: 'product',
-                component: () => import('../views/pms/product.vue'),
-            }
-        ]
-    }
+    // {
+    //     path: '/pms',
+    //     name: 'pms',
+    //     component: () => import('../views/home/home.vue'),
+    //     children: [
+    //         {
+    //             path: 'product',
+    //             name: 'product',
+    //             component: () => import('../views/pms/product.vue'),
+    //         }
+    //     ]
+    // }
 ]
 
 const router = createRouter({
@@ -50,7 +50,30 @@ router.beforeEach((_to, _from, next) => {
     if(token && store.state.menus.length === 0) {
         console.log('menus为空')
         // 获取用户信息
-        store.dispatch('getAdminInfoApi');
+        store.dispatch('getAdminInfoApi').then(() => {
+            const menus = store.getters.getNewMenus;
+            console.log('menus--->', menus)
+            // const newRoutes:RouteRecordRaw[] = []
+            // 循环菜单对象
+            for(let key in menus) {
+                const newRoute: RouteRecordRaw = {
+                    path: `/${menus[key].name}`,
+                    name: menus[key].name,
+                    component: () => import(`../views/home/home.vue`),
+                    children: []
+                }
+                for(let i = 0; i < menus[key].children.length; i++) {
+                    newRoute.children?.push({
+                        path: menus[key].children[i].name,
+                        name: menus[key].children[i].name,
+                        component: () => import(`../views/${menus[key].name}/${menus[key].children[i].name}.vue`),
+                    })
+                }
+                // 动态添加路由规则
+                router.addRoute(newRoute)
+            }
+            console.log('routes--->', routes)
+        })
     }
     next()
 })
