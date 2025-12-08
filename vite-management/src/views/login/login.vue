@@ -80,8 +80,8 @@ const loginFn = () => {
                 ElMessage.success('登录成功')
                 // 获取用户信息
                 store.dispatch('getAdminInfoApi').then(res => {
-                    // 跳转首页
-                    router.push('/index')
+                    // 跳转首页的时候先跳转一个临时路由 /temp 去生成路由规则，然后在路由守卫里在去跳转 /index
+                    router.push('/temp')
                 })
             } else {
                 ElMessage.error('登录报错')
