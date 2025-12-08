@@ -9,19 +9,15 @@ import Cookie from 'js-cookie'
 
 const routes: RouteRecordRaw[] = [
     {
-        path: '/',
-        redirect: '/login'
-    },
-    {
         path: '/login',
         name: 'login',
         component: () => import('../views/login/login.vue')
     },
-    {
-        path: '/home',
-        name: 'home',
-        component: () => import('../views/home/home.vue')
-    },
+    // {
+    //     path: '/home',
+    //     name: 'home',
+    //     component: () => import('../views/home/home.vue')
+    // },
     // 动态生成的路由配置结构需要如下
     // {
     //     path: '/pms',
@@ -43,7 +39,7 @@ const router = createRouter({
 })
 
 // 前置导航守卫
-router.beforeEach((_to, _from, next) => {
+router.beforeEach((to, _from, next) => {
     // 1、token && vuex里面的 menus 为空
     const token = Cookie.get('token')
     console.log(store)
@@ -60,6 +56,7 @@ router.beforeEach((_to, _from, next) => {
                     path: `/${menus[key].name}`,
                     name: menus[key].name,
                     component: () => import(`../views/home/home.vue`),
+                    redirect: `/${menus[key].name}/${menus[key].children[0].name}`,
                     children: []
                 }
                 for(let i = 0; i < menus[key].children.length; i++) {
@@ -72,10 +69,25 @@ router.beforeEach((_to, _from, next) => {
                 // 动态添加路由规则
                 router.addRoute(newRoute)
             }
+            // 动态添加首页
+            router.addRoute({
+                path: "/",
+                name: "home",
+                component: () => import(`../views/home/home.vue`),
+                redirect: '/index', // 访问 / 跳转到 /index 然后匹配上 index.vue
+                children: [{
+                    path: "index",
+                    name: "index",
+                    component: () => import(`../views/index/index.vue`),
+                }]
+            })
             console.log('routes--->', routes)
+            // 路由规则没有刷新，需要再次next进入路由守卫
+            next(to.path)
         })
+    } else {
+        next()
     }
-    next()
 })
 
 export const initRouter = (app: App<Element>) => {

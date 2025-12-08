@@ -19,7 +19,7 @@
 
 <script lang='ts' setup>
 import { onMounted, reactive, ref } from 'vue'
-import { adminLoginApi, getAdminInfoApi } from '@/api/login'
+import { adminLoginApi } from '@/api/login'
 import Cookie from 'js-cookie'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
@@ -80,8 +80,8 @@ const loginFn = () => {
                 ElMessage.success('登录成功')
                 // 获取用户信息
                 store.dispatch('getAdminInfoApi').then(res => {
-                    // 跳转home页面
-                    router.push('/home')
+                    // 跳转首页
+                    router.push('/index')
                 })
             } else {
                 ElMessage.error('登录报错')
