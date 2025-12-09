@@ -95,6 +95,12 @@ router.beforeEach((to, from, next) => {
         genRoutes()
         // 路由规则没有刷新，需要再次next进入路由守卫
         next('/index')
+    } else if (!token && to.path !== '/login') {
+        // 没登录就访问其他页面的时候，就跳转到登录页面去登录
+        next('/login')
+    } else if (token && to.path === '/login') {
+        // 如果登录了，要去登录页面，从哪个页面过去登录就到哪个页面去
+        next(from)
     } else {
         next()
     }
