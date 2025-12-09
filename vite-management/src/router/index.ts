@@ -94,7 +94,7 @@ router.beforeEach((to, from, next) => {
         // 第一次登录，动态添加路由规则 to.path === '/index' 要改成其他路由 /temp 避免登录进来进入 index 直接死循环
         genRoutes()
         // 路由规则没有刷新，需要再次next进入路由守卫
-        next()
+        next('/index')
     } else {
         next()
     }
