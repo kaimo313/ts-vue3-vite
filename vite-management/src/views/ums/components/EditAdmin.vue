@@ -1,11 +1,11 @@
 <template>
     <el-dialog v-model="dialogVisible" title="Shipping address" width="500" :before-close="close">
-        <el-form :model="form" label-width="120px">
+        <el-form :model="newForm" label-width="120px">
             <el-form-item label="Promotion name">
-                <el-input v-model="form.name" autocomplete="off" />
+                <el-input v-model="newForm.username" autocomplete="off" />
             </el-form-item>
             <el-form-item label="Zones">
-                <el-select v-model="form.name" placeholder="Please select a zone">
+                <el-select v-model="newForm.username" placeholder="Please select a zone">
                 <el-option label="Zone No.1" value="shanghai" />
                 <el-option label="Zone No.2" value="beijing" />
                 </el-select>
@@ -21,19 +21,28 @@
 </template>
 
 <script lang='ts' setup>
-import { computed, reactive, toRefs } from 'vue'
+import { computed, reactive, toRefs, watch } from 'vue'
 
 const props = defineProps<{
-    visible: boolean
+    visible: boolean,
+    form: {
+        username?: string
+    }
 }>()
 
-const state = reactive({
-    form: {
-        name: ''
+const state = reactive<{
+    newForm: {
+        username?: string
     }
+}>({
+    newForm: {}
 })
 
-const { form } = toRefs(state)
+const { newForm } = toRefs(state)
+// 拷贝form
+watch(() => props.form, () => {
+    newForm.value = { ...props.form }
+})
 
 const emit = defineEmits<{
     (event: 'update:visible', value: boolean): void

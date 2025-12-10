@@ -21,14 +21,14 @@
                 </template>
             </el-table-column>
             <el-table-column label="操作">
-                <template #default>
+                <template #default="{row}">
                     <el-button type="text">分配角色</el-button>
-                    <el-button type="text" @click="editAdmin">编辑</el-button>
+                    <el-button type="text" @click="editAdmin(row)">编辑</el-button>
                 </template>
             </el-table-column>
         </el-table>
         <!-- 编辑 -->
-        <EditAdmin v-model:visible="visible"></EditAdmin>
+        <EditAdmin v-model:visible="visible" :form="rowData"></EditAdmin>
     </div>
 </template>
 
@@ -40,13 +40,17 @@ import EditAdmin from './components/EditAdmin.vue'
 
 const state = reactive<{
     tableData: {}[]
-    visible: boolean
+    visible: boolean,
+    rowData: {
+        username?: string
+    }
 }>({
     tableData: [],
-    visible: false
+    visible: false,
+    rowData: {}
 })
 
-let { tableData, visible } = toRefs(state)
+let { tableData, visible, rowData } = toRefs(state)
 
 getAdminListApi({
     keyword: '',
@@ -78,8 +82,9 @@ const formateDate = (time: string | undefined) => {
 }
 
 // 点击编辑按钮
-const editAdmin = () => {
+const editAdmin = (row: {}) => {
     visible.value = true
+    rowData.value = row
 }
 
 </script>
