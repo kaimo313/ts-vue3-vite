@@ -15,9 +15,20 @@
                     {{ formateDate(scope.row.loginTime) }}
                 </template>
             </el-table-column>
-            <el-table-column prop="status" label="是否启用"/>
-            <el-table-column label="操作"></el-table-column>
+            <el-table-column label="是否启用">
+                <template v-slot:default="scope">
+                    <el-switch v-model="scope.row.status" :active-value="1" :inactive-value="0"></el-switch>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template #default>
+                    <el-button type="text">分配角色</el-button>
+                    <el-button type="text" @click="editAdmin">编辑</el-button>
+                </template>
+            </el-table-column>
         </el-table>
+        <!-- 编辑 -->
+        <EditAdmin v-model:visible="visible"></EditAdmin>
     </div>
 </template>
 
@@ -25,14 +36,17 @@
 import { reactive, toRefs } from 'vue'
 import { getAdminListApi } from '@/api/ums'
 import { ElMessage } from 'element-plus'
+import EditAdmin from './components/EditAdmin.vue'
 
 const state = reactive<{
     tableData: {}[]
+    visible: boolean
 }>({
-    tableData: []
+    tableData: [],
+    visible: false
 })
 
-let { tableData } = toRefs(state)
+let { tableData, visible } = toRefs(state)
 
 getAdminListApi({
     keyword: '',
@@ -61,6 +75,11 @@ const formateDate = (time: string | undefined) => {
     let min = addZero(date.getMinutes());
     let sec = addZero(date.getSeconds());
     return  `${year}-${month}-${day} ${hour}:${min}:${sec}`
+}
+
+// 点击编辑按钮
+const editAdmin = () => {
+    visible.value = true
 }
 
 </script>
