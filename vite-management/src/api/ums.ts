@@ -6,7 +6,7 @@ interface ManageResponse<T = null> {
     data: T
 }
 
-type PromiseResponse<T> = Promise<ManageResponse<T>>
+type PromiseResponse<T = {}> = Promise<ManageResponse<T>>
 
 interface AdminListParams {
     keyword: string
@@ -27,4 +27,8 @@ export const getAdminListApi = (data: AdminListParams):PromiseResponse<AdminList
     return request.get('/admin/list', {
         params: data
     })
+}
+// 修改指定用户信息
+export const updateAdmin = (id: number, data: AdminObjItf):PromiseResponse => {
+    return request.post('/admin/update/' + id, data)
 }

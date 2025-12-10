@@ -1,6 +1,24 @@
 import { type MockMethod } from 'vite-plugin-mock'
+import fs from 'fs'
+import path from 'path'
 
-import { validateToken } from '../utils' 
+import { validateToken } from '../utils'
+
+const dataFile = path.join(process.cwd(), 'src/mock/data/admin-list.json')
+
+const readAdmins = () => {
+    try {
+        const raw = fs.readFileSync(dataFile, 'utf-8')
+        return JSON.parse(raw) as Array<Record<string, any>>
+    } catch (e) {
+        console.error('读取用户数据失败', e)
+        return []
+    }
+}
+
+const writeAdmins = (list: Array<Record<string, any>>) => {
+    fs.writeFileSync(dataFile, JSON.stringify(list, null, 2), 'utf-8')
+}
 
 export default [
     {
@@ -12,41 +30,59 @@ export default [
                 return tokenCheck.response
             }
 
+            const adminList = readAdmins()
+            const pageSize = 10
+            const pageNum = 1
+            const total = adminList.length
+            const totalPage = Math.max(1, Math.ceil(total / pageSize))
+
             return {
                 code: 200,
                 message: '获取用户数据列表',
                 data: {
-                    list: [
-                        {
-                            createTime: '2018-09-29T05:55:39.000+00:00',
-                            email: 'kaimo313@foxmail.com',
-                            icon: '',
-                            id: 1,
-                            loginTime: '2018-09-29T05:55:39.000+00:00',
-                            nickName: '超级管理员',
-                            note: '超级管理员',
-                            password: '123456',
-                            status: 1, // 是否启用 1启用 0禁用
-                            username: 'admin'
-                        },
-                        {
-                            createTime: '2018-09-29T05:55:39.000+00:00',
-                            email: 'kaimo313@foxmail.com',
-                            icon: '',
-                            id: 2,
-                            loginTime: '2018-09-29T05:55:39.000+00:00',
-                            nickName: '凯小默',
-                            note: '凯小默的笔记',
-                            password: '123456',
-                            status: 0, // 是否启用 1启用 0禁用
-                            username: 'kaimo'
-                        }
-                    ],
-                    pageNum: 1,
-                    pageSize: 10,
-                    total: 2,
-                    totalPage: 1,
+                    list: adminList,
+                    pageNum,
+                    pageSize,
+                    total,
+                    totalPage
                 }
+            }
+        }
+    },
+    {
+        url: '/api/admin/update/:id',
+        method: 'post',
+        response: (options: {
+            headers: Record<string, string>
+            body: Record<string, unknown>
+            url: string
+        }) => {
+            const { headers, body, url } = options
+            const tokenCheck = validateToken(headers)
+            if (!tokenCheck.valid) {
+                return tokenCheck.response
+            }
+
+            const adminList = readAdmins()
+            const id = Number((url.match(/\/api\/admin\/update\/(\d+)/) || [])[1])
+            const target = adminList.find(item => item.id === id)
+
+            if (!target) {
+                return {
+                    code: 404,
+                    message: '未找到对应的用户',
+                    data: null
+                }
+            }
+
+            // 合并更新，同时保留原有的 id
+            Object.assign(target, body, { id: target.id })
+            writeAdmins(adminList)
+
+            return {
+                code: 200,
+                message: '修改用户信息成功',
+                data: target
             }
         }
     }

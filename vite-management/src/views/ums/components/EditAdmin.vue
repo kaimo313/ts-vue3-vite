@@ -1,14 +1,24 @@
 <template>
-    <el-dialog v-model="dialogVisible" title="Shipping address" width="500" :before-close="close">
+    <el-dialog v-model="dialogVisible" title="编辑用户信息" width="500" :before-close="close">
         <el-form :model="newForm" label-width="120px">
-            <el-form-item label="Promotion name">
+            <el-form-item label="账号">
                 <el-input v-model="newForm.username" autocomplete="off" />
             </el-form-item>
-            <el-form-item label="Zones">
-                <el-select v-model="newForm.nickName" placeholder="Please select a zone">
-                <el-option label="Zone No.1" value="shanghai" />
-                <el-option label="Zone No.2" value="beijing" />
-                </el-select>
+            <el-form-item label="姓名">
+                <el-input v-model="newForm.nickName" autocomplete="off" />
+            </el-form-item>
+            <el-form-item label="邮箱">
+                <el-input v-model="newForm.email" autocomplete="off" />
+            </el-form-item>
+            <el-form-item label="密码">
+                <el-input v-model="newForm.password" type="password" autocomplete="off" />
+            </el-form-item>
+            <el-form-item label="备注">
+                <el-input v-model="newForm.note" type="textarea" autocomplete="off" />
+            </el-form-item>
+            <el-form-item label="是否启用">
+                <el-radio v-model="newForm.status" :label="1">是</el-radio>
+                <el-radio v-model="newForm.status" :label="0">否</el-radio>
             </el-form-item>
         </el-form>
         <template #footer>
@@ -22,6 +32,8 @@
 
 <script lang='ts' setup>
 import { computed, reactive, toRefs, watch } from 'vue'
+import { updateAdmin } from '@/api/ums'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps<{
     visible: boolean,
@@ -42,6 +54,7 @@ watch(() => props.form, () => {
 
 const emit = defineEmits<{
     (event: 'update:visible', value: boolean): void
+    (event: 'sure'): void
 }>()
 
 // 双向绑定 dialog 显示状态（emit 更新父组件）
@@ -55,7 +68,16 @@ const close = () => {
 }
 // 确定
 const modifyAdmin = () => {
-    close()
+    if(!newForm.value.id) return
+    updateAdmin(newForm.value.id, newForm.value).then((res) => {
+    if(res.code === 200) {
+        close()
+        emit('sure')
+        ElMessage.success('修改指定用户信息成功')
+    } else {
+        ElMessage.error('修改指定用户信息失败')
+    }
+})
 }
 
 </script>

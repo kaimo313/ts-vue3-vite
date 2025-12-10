@@ -1,0 +1,26 @@
+[
+  {
+    "createTime": "2018-09-29T05:55:39.000+00:00",
+    "email": "kaimo313@foxmail.com",
+    "icon": "",
+    "id": 1,
+    "loginTime": "2018-09-29T05:55:39.000+00:00",
+    "nickName": "超级管理员",
+    "note": "超级管理员",
+    "password": "123456",
+    "status": 1,
+    "username": "admin"
+  },
+  {
+    "createTime": "2018-09-29T05:55:39.000+00:00",
+    "email": "112@qq.com",
+    "icon": "",
+    "id": 2,
+    "loginTime": "2018-09-29T05:55:39.000+00:00",
+    "nickName": "凯小默",
+    "note": "凯小默的笔记666",
+    "password": "123456",
+    "status": 0,
+    "username": "kaimo313"
+  }
+]

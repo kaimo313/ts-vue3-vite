@@ -28,7 +28,7 @@
             </el-table-column>
         </el-table>
         <!-- 编辑 -->
-        <EditAdmin v-model:visible="visible" :form="rowData"></EditAdmin>
+        <EditAdmin v-model:visible="visible" :form="rowData" @sure="getTableData"></EditAdmin>
     </div>
 </template>
 
@@ -49,18 +49,20 @@ const state = reactive<{
 })
 
 let { tableData, visible, rowData } = toRefs(state)
-
-getAdminListApi({
-    keyword: '',
-    pageNum: 1,
-    pageSize: 10
-}).then((res) => {
-    if(res.code === 200) {
-        tableData.value = res.data.list
-    } else {
-        ElMessage.error('获取用户数据列表失败')
-    }
-})
+const getTableData = () => {
+    getAdminListApi({
+        keyword: '',
+        pageNum: 1,
+        pageSize: 10
+    }).then((res) => {
+        if(res.code === 200) {
+            tableData.value = res.data.list
+        } else {
+            ElMessage.error('获取用户数据列表失败')
+        }
+    })
+}
+getTableData();
 
 const addZero = (num: number) => {
     return num > 9 ? num : '0' + num
