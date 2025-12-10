@@ -41,9 +41,7 @@ import EditAdmin from './components/EditAdmin.vue'
 const state = reactive<{
     tableData: {}[]
     visible: boolean,
-    rowData: {
-        username?: string
-    }
+    rowData: AdminObjItf
 }>({
     tableData: [],
     visible: false,
@@ -82,7 +80,7 @@ const formateDate = (time: string | undefined) => {
 }
 
 // 点击编辑按钮
-const editAdmin = (row: {}) => {
+const editAdmin = (row: AdminObjItf) => {
     visible.value = true
     rowData.value = row
 }

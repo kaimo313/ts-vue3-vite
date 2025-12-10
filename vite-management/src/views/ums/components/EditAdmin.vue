@@ -5,7 +5,7 @@
                 <el-input v-model="newForm.username" autocomplete="off" />
             </el-form-item>
             <el-form-item label="Zones">
-                <el-select v-model="newForm.username" placeholder="Please select a zone">
+                <el-select v-model="newForm.nickName" placeholder="Please select a zone">
                 <el-option label="Zone No.1" value="shanghai" />
                 <el-option label="Zone No.2" value="beijing" />
                 </el-select>
@@ -25,15 +25,11 @@ import { computed, reactive, toRefs, watch } from 'vue'
 
 const props = defineProps<{
     visible: boolean,
-    form: {
-        username?: string
-    }
+    form: AdminObjItf
 }>()
 
 const state = reactive<{
-    newForm: {
-        username?: string
-    }
+    newForm: AdminObjItf
 }>({
     newForm: {}
 })
