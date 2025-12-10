@@ -22,33 +22,40 @@
             </el-table-column>
             <el-table-column label="操作">
                 <template #default="{row}">
-                    <el-button type="text">分配角色</el-button>
+                    <el-button type="text" @click="allocRole(row.id)">分配角色</el-button>
                     <el-button type="text" @click="editAdmin(row)">编辑</el-button>
                 </template>
             </el-table-column>
         </el-table>
         <!-- 编辑 -->
         <EditAdmin v-model:visible="visible" :form="rowData" @sure="getTableData"></EditAdmin>
+        <!-- 分配权限 -->
+        <EditRole v-model:visible="roleVisible" :form="roleData" @sure="getTableData"></EditRole>
     </div>
 </template>
 
 <script lang='ts' setup>
 import { reactive, toRefs } from 'vue'
-import { getAdminListApi } from '@/api/ums'
+import { getAdminListApi, getRoleListAll, getAdminRoleById } from '@/api/ums'
 import { ElMessage } from 'element-plus'
 import EditAdmin from './components/EditAdmin.vue'
+import EditRole from './components/EditRole.vue'
 
 const state = reactive<{
     tableData: {}[]
     visible: boolean,
     rowData: AdminObjItf
+    roleVisible: boolean
+    roleData: AdminRoleFormData
 }>({
     tableData: [],
     visible: false,
-    rowData: {}
+    rowData: {},
+    roleVisible: false,
+    roleData: {}
 })
 
-let { tableData, visible, rowData } = toRefs(state)
+let { tableData, visible, rowData, roleVisible, roleData } = toRefs(state)
 const getTableData = () => {
     getAdminListApi({
         keyword: '',
@@ -63,6 +70,15 @@ const getTableData = () => {
     })
 }
 getTableData();
+
+// 获取所有角色
+getRoleListAll().then((res) => {
+    if(res.code === 200) {
+        roleData.value.roleLists = res.data
+    } else {
+        ElMessage.error('获取所有角色失败')
+    }
+})
 
 const addZero = (num: number) => {
     return num > 9 ? num : '0' + num
@@ -85,6 +101,15 @@ const formateDate = (time: string | undefined) => {
 const editAdmin = (row: AdminObjItf) => {
     visible.value = true
     rowData.value = row
+}
+// 点击分配权限按钮
+const allocRole = (id: number) => {
+    getAdminRoleById(id).then(res => {
+        if(res.code === 200) {
+            roleVisible.value = true
+            roleData.value.userRoles = res.data
+        }
+    })
 }
 
 </script>

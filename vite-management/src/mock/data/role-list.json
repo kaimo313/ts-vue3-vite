@@ -1,0 +1,32 @@
+[
+    {
+        "adminCount": 0,
+        "createTime": "2018-09-29T05:55:39.000+00:00",
+        "description": "只能查看及操作商品",
+        "id": 1,
+        "loginTime": "2018-09-29T05:55:39.000+00:00",
+        "name": "商品管理员",
+        "sort": 0,
+        "status": 1
+    },
+    {
+        "adminCount": 0,
+        "createTime": "2018-09-29T05:55:39.000+00:00",
+        "description": "只能查看及操作订单",
+        "id": 2,
+        "loginTime": "2018-09-29T05:55:39.000+00:00",
+        "name": "订单管理员",
+        "sort": 0,
+        "status": 1
+    },
+    {
+        "adminCount": 0,
+        "createTime": "2018-09-29T05:55:39.000+00:00",
+        "description": "都能查看操作",
+        "id": 3,
+        "loginTime": "2018-09-29T05:55:39.000+00:00",
+        "name": "超级管理员",
+        "sort": 0,
+        "status": 1
+    }
+]

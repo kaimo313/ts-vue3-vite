@@ -4,11 +4,13 @@ import path from 'path'
 
 import { validateToken } from '../utils'
 
-const dataFile = path.join(process.cwd(), 'src/mock/data/admin-list.json')
+const adminDataFile = path.join(process.cwd(), 'src/mock/data/admin-list.json')
+const roleListDataFile = path.join(process.cwd(), 'src/mock/data/role-list.json')
+const roleDataFile = path.join(process.cwd(), 'src/mock/data/role.json')
 
 const readAdmins = () => {
     try {
-        const raw = fs.readFileSync(dataFile, 'utf-8')
+        const raw = fs.readFileSync(adminDataFile, 'utf-8')
         return JSON.parse(raw) as Array<Record<string, any>>
     } catch (e) {
         console.error('读取用户数据失败', e)
@@ -17,7 +19,27 @@ const readAdmins = () => {
 }
 
 const writeAdmins = (list: Array<Record<string, any>>) => {
-    fs.writeFileSync(dataFile, JSON.stringify(list, null, 2), 'utf-8')
+    fs.writeFileSync(adminDataFile, JSON.stringify(list, null, 2), 'utf-8')
+}
+
+const readRoleLists = () => {
+    try {
+        const raw = fs.readFileSync(roleListDataFile, 'utf-8')
+        return JSON.parse(raw) as Array<Record<string, any>>
+    } catch (e) {
+        console.error('读取角色列表数据失败', e)
+        return []
+    }
+}
+
+const readRole = () => {
+    try {
+        const raw = fs.readFileSync(roleDataFile, 'utf-8')
+        return JSON.parse(raw) as Array<Record<string, any>>
+    } catch (e) {
+        console.error('读取角色数据失败', e)
+        return []
+    }
 }
 
 export default [
@@ -83,6 +105,40 @@ export default [
                 code: 200,
                 message: '修改用户信息成功',
                 data: target
+            }
+        }
+    },
+    {
+        url: '/api/role/listAll',
+        method: 'get',
+        response: ({ headers }: { headers: Record<string, string> }) => {
+            const tokenCheck = validateToken(headers)
+            if (!tokenCheck.valid) {
+                return tokenCheck.response
+            }
+
+            const roleList = readRoleLists()
+            return {
+                code: 200,
+                message: '获取角色列表成功',
+                data: roleList
+            }
+        }
+    },
+    {
+        url: '/api/admin/role/:id',
+        method: 'get',
+        response: ({ headers }: { headers: Record<string, string> }) => {
+            const tokenCheck = validateToken(headers)
+            if (!tokenCheck.valid) {
+                return tokenCheck.response
+            }
+
+            const roleList = readRole()
+            return {
+                code: 200,
+                message: '获取角色成功',
+                data: roleList
             }
         }
     }

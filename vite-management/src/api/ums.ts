@@ -32,3 +32,11 @@ export const getAdminListApi = (data: AdminListParams):PromiseResponse<AdminList
 export const updateAdmin = (id: number, data: AdminObjItf):PromiseResponse => {
     return request.post('/admin/update/' + id, data)
 }
+// 获取所有角色
+export const getRoleListAll = ():PromiseResponse<RoleObjItf[]> => {
+    return request.get('/role/listAll')
+}
+// 根据用户id获取角色
+export const getAdminRoleById = (id: number):PromiseResponse<RoleObjItf[]> => {
+    return request.get('/admin/role/' + id)
+}
