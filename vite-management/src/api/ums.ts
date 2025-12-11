@@ -1,27 +1,5 @@
 import request from './request'
 
-interface ManageResponse<T = null> {
-    code: number
-    message: string
-    data: T
-}
-
-type PromiseResponse<T = {}> = Promise<ManageResponse<T>>
-
-interface AdminListParams {
-    keyword: string
-    pageNum: number
-    pageSize: number
-}
-
-interface AdminListResponse {
-    list: {}[]
-    pageNum: number
-    pageSize: number
-    total: number
-    totalPage: number
-}
-
 // 获取用户数据列表
 export const getAdminListApi = (data: AdminListParams):PromiseResponse<AdminListResponse> => {
     return request.get('/admin/list', {
