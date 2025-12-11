@@ -18,13 +18,13 @@ const state = reactive<{
 
 let { salePie } = toRefs(state)
 
-// getAdminStat().then((res) => {
-//     if(res.code === 200) {
-//         salePie.value = res.data.salePie
-//     } else {
-//         ElMessage.error('获取首页数据失败')
-//     }
-// })
+getAdminStat().then((res) => {
+    if(res.code === 200) {
+        salePie.value = res.data.salePie
+    } else {
+        ElMessage.error('获取首页数据失败')
+    }
+})
 
 </script>
 

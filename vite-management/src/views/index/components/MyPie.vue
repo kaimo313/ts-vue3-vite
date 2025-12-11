@@ -1,55 +1,40 @@
 <template>
-    <div id="pie" style="width: 600px;height:400px;"></div>
+    <div id="pie" style="width: 100%;height:400px;"></div>
 </template>
 
 <script lang='ts' setup>
-import { onMounted } from 'vue'
+import { watch } from 'vue'
 import * as echarts from 'echarts'
 
 const props = defineProps<{
-    data: {}[]
+    data: {
+        name: string
+        today_money: string
+    }[]
 }>()
 
-onMounted(() => {
+watch(() => props.data, () => {
+    const arr = props.data.map(item => ({ name: item.name, value: item.today_money}))
+    console.log('arr---->', arr)
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('pie'));
 
     // 指定图表的配置项和数据
     var option = {
-        tooltip: {
-            trigger: 'item'
-        },
         legend: {
-            top: '5%',
-            left: 'center'
+            right: 10,
+            top: 20,
+            width: 300,
+            height: 100,
+            orient: 'vertical'
         },
         series: [
             {
                 name: 'Access From',
                 type: 'pie',
                 radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: 40,
-                        fontWeight: 'bold'
-                    }
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [
-                    { value: 1048, name: 'Search Engine' },
-                    { value: 735, name: 'Direct' },
-                    { value: 580, name: 'Email' },
-                    { value: 484, name: 'Union Ads' },
-                    { value: 300, name: 'Video Ads' }
-                ]
+                center: ['35%', '45%'],
+                data: arr
             }
         ]
     };
