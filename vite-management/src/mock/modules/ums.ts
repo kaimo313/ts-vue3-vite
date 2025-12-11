@@ -42,6 +42,10 @@ const readRole = () => {
     }
 }
 
+const writeRole = (list: Array<Record<string, any>>) => {
+    fs.writeFileSync(roleDataFile, JSON.stringify(list, null, 2), 'utf-8')
+}
+
 export default [
     {
         url: '/api/admin/list',
@@ -139,6 +143,34 @@ export default [
                 code: 200,
                 message: '获取角色成功',
                 data: roleList
+            }
+        }
+    },
+    {
+        url: '/api/admin/role/update',
+        method: 'post',
+        response: (options: {
+            headers: Record<string, string>
+            body: { adminId: number; roleIds: number[] }
+        }) => {
+            const { headers, body } = options
+            const tokenCheck = validateToken(headers)
+            if (!tokenCheck.valid) {
+                return tokenCheck.response
+            }
+
+            const { roleIds } = body || {}
+            const roleList = readRoleLists()
+            const selectedRoles = Array.isArray(roleIds)
+                ? roleList.filter(item => roleIds.includes(item.id))
+                : []
+
+            writeRole(selectedRoles)
+
+            return {
+                code: 200,
+                message: '分配角色成功',
+                data: selectedRoles
             }
         }
     }

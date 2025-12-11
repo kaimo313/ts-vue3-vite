@@ -52,7 +52,11 @@ const state = reactive<{
     visible: false,
     rowData: {},
     roleVisible: false,
-    roleData: {}
+    roleData: {
+        userRoles: [],
+        roleLists: [],
+        adminId: 0
+    }
 })
 
 let { tableData, visible, rowData, roleVisible, roleData } = toRefs(state)
@@ -107,6 +111,7 @@ const allocRole = (id: number) => {
     getAdminRoleById(id).then(res => {
         if(res.code === 200) {
             roleVisible.value = true
+            roleData.value.adminId = id
             roleData.value.userRoles = res.data
         }
     })

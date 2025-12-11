@@ -40,3 +40,10 @@ export const getRoleListAll = ():PromiseResponse<RoleObjItf[]> => {
 export const getAdminRoleById = (id: number):PromiseResponse<RoleObjItf[]> => {
     return request.get('/admin/role/' + id)
 }
+// 给用户分配角色
+export const updateAdminRole = (data: {
+    adminId: number
+    roleIds: number[]
+}):PromiseResponse<RoleObjItf[]> => {
+    return request.post('/admin/role/update', data)
+}

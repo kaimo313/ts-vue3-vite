@@ -11,4 +11,5 @@ interface AdminObjItf {
 interface AdminRoleFormData {
     userRoles?: RoleObjItf[]
     roleLists?: RoleObjItf[]
+    adminId: number
 }

@@ -18,6 +18,8 @@
 
 <script lang='ts' setup>
 import { computed, reactive, toRefs, watch } from 'vue'
+import { updateAdminRole } from '@/api/ums'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps<{
     visible: boolean,
@@ -52,7 +54,18 @@ const close = () => {
 }
 // 确定
 const modifyRole = () => {
-    close()
+    updateAdminRole({
+        adminId: props.form.adminId,
+        roleIds: roles.value
+    }).then((res) => {
+        if(res.code === 200) {
+            close()
+            emit('sure')
+            ElMessage.success('修改用户角色成功')
+        } else {
+            ElMessage.error('修改用户角色失败')
+        }
+    })
 }
 
 </script>
