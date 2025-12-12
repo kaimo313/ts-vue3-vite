@@ -1,3 +1,4 @@
 interface IndexDataItf {
     salePie: {}[]
+    saleMap: {}[]
 }

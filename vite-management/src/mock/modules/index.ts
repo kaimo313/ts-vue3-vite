@@ -4,11 +4,11 @@ import path from 'path'
 
 import { validateToken } from '../utils'
 
-const pieDataFile = path.join(process.cwd(), 'src/mock/data/pie.json')
+const pieMapDataFile = path.join(process.cwd(), 'src/mock/data/pie-map.json')
 
 const readPieData = () => {
     try {
-        const raw = fs.readFileSync(pieDataFile, 'utf-8')
+        const raw = fs.readFileSync(pieMapDataFile, 'utf-8')
         return JSON.parse(raw) as Record<string, unknown>
     } catch (e) {
         console.error('读取首页饼图数据失败', e)
