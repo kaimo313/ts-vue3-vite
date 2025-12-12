@@ -11,18 +11,54 @@ import chinaGeojson from '@/mock/data/china.geojson.json'
 echarts.registerMap('china', chinaGeojson as any)
 
 const props = defineProps<{
-    data: {}[]
+    data: {
+        areaName: string
+        saleNum: number
+    }[]
 }>()
 let myMap: echarts.ECharts;
 
 watch(() => props.data, () => {
+    const data = props.data.map(item => ({ name: item.areaName, value: item.saleNum }))
+    console.log('data----->', data)
     // 基于准备好的dom，初始化echarts实例
     if(!myMap) {
         myMap = echarts.init(document.getElementById('map'));
         const option = {
+            tooltip: {
+                show: true,
+                formatter: '{b}<br />销量：{c}',
+                borderWidth: 0,
+                backgroundColor: 'rgba(50, 50, 50, 0.7)',
+                textStyle: {
+                    color: '#fff'
+                }
+            },
             series: {
                 type: 'map',
-                map: 'china'
+                map: 'china',
+                itemStyle: {
+                    borderColor: '#fff'
+                },
+                emphasis: {
+                    label: {
+                        show: false
+                    },
+                    itemStyle: {
+                        areaColor: 'skyblue'
+                    }
+                },
+                data
+            },
+            // 连续型视觉映射组件
+            visualMap: {
+                type: 'continuous',
+                min: 0,
+                max: 1000000,
+                calculable: true, // 是否显示拖拽用的手柄（手柄能拖拽调整选中范围）
+                inRange: {
+                    color: ['#eeeeee', '#aaaaaa', 'green', 'yellow', 'orange', 'red']
+                }
             }
         }
         myMap.setOption(option);

@@ -86,5 +86,146 @@
             "yesterday_money": "266789.45"
         }
     ],
-    "saleMap": [{}]
+    "saleMap": [
+        {
+            "areaName": "北京市",
+            "saleNum": 1250000
+        },
+        {
+            "areaName": "天津市",
+            "saleNum": 88500
+        },
+        {
+            "areaName": "河北省",
+            "saleNum": 11200
+        },
+        {
+            "areaName": "山西省",
+            "saleNum": 37200
+        },
+        {
+            "areaName": "内蒙古自治区",
+            "saleNum": 506800
+        },
+        {
+            "areaName": "辽宁省",
+            "saleNum": 19800
+        },
+        {
+            "areaName": "吉林省",
+            "saleNum": 26500
+        },
+        {
+            "areaName": "黑龙江省",
+            "saleNum": 37800
+        },
+        {
+            "areaName": "上海市",
+            "saleNum": 1520000
+        },
+        {
+            "areaName": "江苏省",
+            "saleNum": 713800
+        },
+        {
+            "areaName": "浙江省",
+            "saleNum": 1320000
+        },
+        {
+            "areaName": "安徽省",
+            "saleNum": 99200
+        },
+        {
+            "areaName": "福建省",
+            "saleNum": 1050000
+        },
+        {
+            "areaName": "江西省",
+            "saleNum": 197500
+        },
+        {
+            "areaName": "山东省",
+            "saleNum": 12800
+        },
+        {
+            "areaName": "河南省",
+            "saleNum": 11800
+        },
+        {
+            "areaName": "湖北省",
+            "saleNum": 680000
+        },
+        {
+            "areaName": "湖南省",
+            "saleNum": 313313313
+        },
+        {
+            "areaName": "广东省",
+            "saleNum": 1450000
+        },
+        {
+            "areaName": "广西壮族自治区",
+            "saleNum": 708800
+        },
+        {
+            "areaName": "海南省",
+            "saleNum": 58000
+        },
+        {
+            "areaName": "重庆市",
+            "saleNum": 919500
+        },
+        {
+            "areaName": "四川省",
+            "saleNum": 11500
+        },
+        {
+            "areaName": "贵州省",
+            "saleNum": 786800
+        },
+        {
+            "areaName": "云南省",
+            "saleNum": 98200
+        },
+        {
+            "areaName": "西藏自治区",
+            "saleNum": 603200
+        },
+        {
+            "areaName": "陕西省",
+            "saleNum": 890000
+        },
+        {
+            "areaName": "甘肃省",
+            "saleNum": 862000
+        },
+        {
+            "areaName": "青海省",
+            "saleNum": 433800
+        },
+        {
+            "areaName": "宁夏回族自治区",
+            "saleNum": 564200
+        },
+        {
+            "areaName": "新疆维吾尔自治区",
+            "saleNum": 7200
+        },
+        {
+            "areaName": "台湾省",
+            "saleNum": 129800
+        },
+        {
+            "areaName": "香港特别行政区",
+            "saleNum": 6800
+        },
+        {
+            "areaName": "澳门特别行政区",
+            "saleNum": 32800
+        },
+        {
+            "areaName": "南海诸岛",
+            "saleNum": 280000
+        }
+    ]
 }
