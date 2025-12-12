@@ -90,7 +90,7 @@ console.log('newMenus---------home-----------', newMenus)
         right: 0;
         left: 250px;
         bottom: 0;
-        background-color: skyblue;
+        background-color: #fff;
     }
 }
 </style>
